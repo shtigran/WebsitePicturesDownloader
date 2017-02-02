@@ -14,6 +14,7 @@ namespace ConsoleApplicationTest
         {
             string all = string.Empty;
             string htmlCode = string.Empty;
+            Console.WriteLine("____Welcome Website Images Downloader____\n");
             Console.Write("Please enter the website path: ");
             string path = Console.ReadLine();
             using (WebClient client = new WebClient() ) // WebClient class inherits IDisposable
@@ -22,6 +23,7 @@ namespace ConsoleApplicationTest
                 all = showMatch(htmlCode, @"<(img)\b[^>]*>");
                 Console.WriteLine("-------------");
                 Console.WriteLine("The program start finding images____");
+                Console.WriteLine("There are the following images: ");
                 string[] split = all.Split(new Char[] { '"', '?' });
                 Console.WriteLine("-------------");
                 int flag = 1;
