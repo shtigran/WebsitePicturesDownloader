@@ -20,19 +20,23 @@ namespace ConsoleApplicationTest
             using (WebClient client = new WebClient() ) // WebClient class inherits IDisposable
             {
                 htmlCode = client.DownloadString(path);
+                Console.WriteLine(all);
                 all = showMatch(htmlCode, @"<(img)\b[^>]*>");
                 Console.WriteLine("-------------");
                 Console.WriteLine("The program start finding images____");
                 Console.WriteLine("There are the following images: ");
                 string[] split = all.Split(new Char[] { '"', '?' });
                 Console.WriteLine("-------------");
+                WebClient client1;
+
                 int flag = 1;
                 
                 foreach (var item in split)
                 {
+                    Console.WriteLine(item);
                     if (item.Contains(".jpg") )
                     {
-                        WebClient client1 = new WebClient();
+                        client1 = new WebClient();
                         Console.WriteLine(path + item);
                         Uri uri = new Uri(path + item);
                         client1.DownloadFileAsync(uri, $"C:\\Users\\labuser13\\Desktop\\ShTigran\\Webimages\\picture{flag}.jpg");
@@ -41,7 +45,7 @@ namespace ConsoleApplicationTest
 
                     if (item.Contains(".png"))
                     {
-                        WebClient client1 = new WebClient();
+                        client1 = new WebClient();
                         Console.WriteLine(path + item);
                         Uri uri = new Uri(path + item);
                         client1.DownloadFileAsync(uri, $"C:\\Users\\labuser13\\Desktop\\ShTigran\\Webimages\\picture{flag}.png");
@@ -50,7 +54,7 @@ namespace ConsoleApplicationTest
 
                     if (item.Contains(".svg"))
                     {
-                        WebClient client1 = new WebClient();
+                        client1 = new WebClient();
                         Console.WriteLine(path + item);
                         Uri uri = new Uri(path + item);
                         client1.DownloadFileAsync(uri, $"C:\\Users\\labuser13\\Desktop\\ShTigran\\Webimages\\picture{flag}.svg");
