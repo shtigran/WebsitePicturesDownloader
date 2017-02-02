@@ -15,7 +15,7 @@ namespace ConsoleApplicationTest
             string all = string.Empty;
             string htmlCode = string.Empty; ;
             string path = "http://mic.am";
-            using (WebClient client = new WebClient()) // WebClient class inherits IDisposable
+            using (WebClient client = new WebClient() ) // WebClient class inherits IDisposable
             {
 
                 htmlCode = client.DownloadString(path);
@@ -55,7 +55,7 @@ namespace ConsoleApplicationTest
                         flag++;
                     }
 
-                }
+                 }
 
             }
                             
