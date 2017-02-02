@@ -20,27 +20,28 @@ namespace ConsoleApplicationTest
             using (WebClient client = new WebClient() ) // WebClient class inherits IDisposable
             {
                 htmlCode = client.DownloadString(path);
-                Console.WriteLine(all);
                 all = showMatch(htmlCode, @"<(img)\b[^>]*>");
                 Console.WriteLine("-------------");
                 Console.WriteLine("The program start finding images____");
                 Console.WriteLine("There are the following images: ");
                 string[] split = all.Split(new Char[] { '"', '?' });
                 Console.WriteLine("-------------");
+                string dir = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
                 WebClient client1;
 
                 int flag = 1;
                 
                 foreach (var item in split)
                 {
-                    Console.WriteLine(item);
+                    
                     if (item.Contains(".jpg") )
                     {
                         client1 = new WebClient();
                         Console.WriteLine(path + item);
                         Uri uri = new Uri(path + item);
-                        client1.DownloadFileAsync(uri, $"C:\\Users\\labuser13\\Desktop\\ShTigran\\Webimages\\picture{flag}.jpg");
+                        client1.DownloadFileAsync(uri, $"{dir}\\picture{flag}.jpg");
                         flag++;
+                        Console.WriteLine(item);
                     }
 
                     if (item.Contains(".png"))
@@ -48,8 +49,9 @@ namespace ConsoleApplicationTest
                         client1 = new WebClient();
                         Console.WriteLine(path + item);
                         Uri uri = new Uri(path + item);
-                        client1.DownloadFileAsync(uri, $"C:\\Users\\labuser13\\Desktop\\ShTigran\\Webimages\\picture{flag}.png");
+                        client1.DownloadFileAsync(uri, $"{dir}\\picture{flag}.png");
                         flag++;
+                        Console.WriteLine(item);
                     }
 
                     if (item.Contains(".svg"))
@@ -57,14 +59,17 @@ namespace ConsoleApplicationTest
                         client1 = new WebClient();
                         Console.WriteLine(path + item);
                         Uri uri = new Uri(path + item);
-                        client1.DownloadFileAsync(uri, $"C:\\Users\\labuser13\\Desktop\\ShTigran\\Webimages\\picture{flag}.svg");
+                        client1.DownloadFileAsync(uri, $"{dir}\\picture{flag}.svg");
                         flag++;
+                        Console.WriteLine(item);
                     }
 
-                 }
-
+                }
             }
-                            
+       
+
+
+
             Console.ReadKey();
         }
 
