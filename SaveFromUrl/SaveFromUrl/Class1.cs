@@ -32,9 +32,10 @@ namespace ConsoleApplicationTest
                 using (WebClient client = new WebClient()) // WebClient class inherits IDisposable
                 {
                     htmlCode = client.DownloadString(path);
-                    all = showMatch(htmlCode, @"<(img)\b[^>]*>");
+
+                    all = showMatch(htmlCode, @"<(img)\b[^>]*>"); 
                     Console.WriteLine("-------------");
-                    Console.WriteLine("There are the following images: ");
+                    Console.WriteLine("\nThere are the following images: ");
                     string[] split = all.Split(new Char[] { '"', '?' });
                     Console.WriteLine("-------------");
                     string dir = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
