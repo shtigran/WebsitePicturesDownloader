@@ -12,64 +12,71 @@ namespace ConsoleApplicationTest
     {
         static void Main(string[] args)
         {
-            string all = string.Empty;
-            string htmlCode = string.Empty;
+
+            // Welcome message
             Console.WriteLine("____Welcome Website Images Downloader____\n");
             Console.Write("Please enter the website path: ");
             string path = Console.ReadLine();
-            if (Uri.IsWellFormedUriString(path, UriKind.RelativeOrAbsolute))
-            { Console.WriteLine("Good"); }
-            else { Console.WriteLine("Bad"); }
 
-            using (WebClient client = new WebClient() ) // WebClient class inherits IDisposable
-            {                
-                htmlCode = client.DownloadString(path);
 
-                all = showMatch(htmlCode, @"<(img)\b[^>]*>");
-                Console.WriteLine("-------------");
-                Console.WriteLine("There are the following images: ");
-                string[] split = all.Split(new Char[] { '"', '?' });
-                Console.WriteLine("-------------");
-                string dir = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-                WebClient client1;
+            // Checking URL validity
+            
+            if (!Uri.IsWellFormedUriString(path, UriKind.RelativeOrAbsolute))
+            { Console.WriteLine("Wrong URL path!!!"); }
+             
+            else
+            {   // Creating strings for operations
+                string all = string.Empty;
+                string htmlCode = string.Empty;
 
-                int flag = 1;
-                
-                foreach (var item in split)
+                using (WebClient client = new WebClient()) // WebClient class inherits IDisposable
                 {
-                    
-                    if (item.Contains(".jpg") )
-                    {
-                        client1 = new WebClient();
-                        Uri uri = new Uri(path + item);
-                        client1.DownloadFileAsync(uri, $"{dir}\\Picture{flag}.jpg");
-                        flag++;
-                        Console.WriteLine(item);
-                    }
+                    htmlCode = client.DownloadString(path);
+                    all = showMatch(htmlCode, @"<(img)\b[^>]*>");
+                    Console.WriteLine("-------------");
+                    Console.WriteLine("There are the following images: ");
+                    string[] split = all.Split(new Char[] { '"', '?' });
+                    Console.WriteLine("-------------");
+                    string dir = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                    WebClient client1;
 
-                    if (item.Contains(".png"))
-                    {
-                        client1 = new WebClient();
-                        Uri uri = new Uri(path + item);
-                        client1.DownloadFileAsync(uri, $"{dir}\\Picture{flag}.png");
-                        flag++;
-                        Console.WriteLine(item);
-                    }
+                    int flag = 1;
 
-                    if (item.Contains(".svg"))
+                    foreach (var item in split)
                     {
-                        client1 = new WebClient();
-                        Uri uri = new Uri(path + item);
-                        client1.DownloadFileAsync(uri, $"{dir}\\Picture{flag}.svg");
-                        flag++;
-                        Console.WriteLine(item);
-                    }
 
+                        if (item.Contains(".jpg"))
+                        {
+                            client1 = new WebClient();
+                            Uri uri = new Uri(path + item);
+                            client1.DownloadFileAsync(uri, $"{dir}\\Picture{flag}.jpg");
+                            flag++;
+                            Console.WriteLine(item);
+                        }
+
+                        if (item.Contains(".png"))
+                        {
+                            client1 = new WebClient();
+                            Uri uri = new Uri(path + item);
+                            client1.DownloadFileAsync(uri, $"{dir}\\Picture{flag}.png");
+                            flag++;
+                            Console.WriteLine(item);
+                        }
+
+                        if (item.Contains(".svg"))
+                        {
+                            client1 = new WebClient();
+                            Uri uri = new Uri(path + item);
+                            client1.DownloadFileAsync(uri, $"{dir}\\Picture{flag}.svg");
+                            flag++;
+                            Console.WriteLine(item);
+                        }
+
+                    }
                 }
+
+
             }
-       
-
-
 
             Console.ReadKey();
         }
