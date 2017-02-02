@@ -13,15 +13,15 @@ namespace ConsoleApplicationTest
         static void Main(string[] args)
         {
             string all = string.Empty;
-            string htmlCode = string.Empty; ;
-            string path = "http://mic.am";
+            string htmlCode = string.Empty;
+            Console.Write("Please enter the website path: ");
+            string path = Console.ReadLine();
             using (WebClient client = new WebClient() ) // WebClient class inherits IDisposable
             {
-
                 htmlCode = client.DownloadString(path);
                 all = showMatch(htmlCode, @"<(img)\b[^>]*>");
                 Console.WriteLine("-------------");
-                Console.WriteLine(all);
+                Console.WriteLine("The program start finding images____");
                 string[] split = all.Split(new Char[] { '"', '?' });
                 Console.WriteLine("-------------");
                 int flag = 1;
@@ -33,7 +33,7 @@ namespace ConsoleApplicationTest
                         WebClient client1 = new WebClient();
                         Console.WriteLine(path + item);
                         Uri uri = new Uri(path + item);
-                        client1.DownloadFileAsync(uri, $"C:\\Users\\labuser13\\Desktop\\ShTigran\\picture{flag}.jpg");
+                        client1.DownloadFileAsync(uri, $"C:\\Users\\labuser13\\Desktop\\ShTigran\\Webimages\\picture{flag}.jpg");
                         flag++;
                     }
 
@@ -42,7 +42,7 @@ namespace ConsoleApplicationTest
                         WebClient client1 = new WebClient();
                         Console.WriteLine(path + item);
                         Uri uri = new Uri(path + item);
-                        client1.DownloadFileAsync(uri, $"C:\\Users\\labuser13\\Desktop\\ShTigran\\picture{flag}.png");
+                        client1.DownloadFileAsync(uri, $"C:\\Users\\labuser13\\Desktop\\ShTigran\\Webimages\\picture{flag}.png");
                         flag++;
                     }
 
@@ -51,7 +51,7 @@ namespace ConsoleApplicationTest
                         WebClient client1 = new WebClient();
                         Console.WriteLine(path + item);
                         Uri uri = new Uri(path + item);
-                        client1.DownloadFileAsync(uri, $"C:\\Users\\labuser13\\Desktop\\ShTigran\\picture{flag}.svg");
+                        client1.DownloadFileAsync(uri, $"C:\\Users\\labuser13\\Desktop\\ShTigran\\Webimages\\picture{flag}.svg");
                         flag++;
                     }
 
@@ -64,7 +64,6 @@ namespace ConsoleApplicationTest
 
         private static string showMatch(string text, string expr)
         {
-            Console.WriteLine("The Expression: " + expr);
             MatchCollection mc = Regex.Matches(text, expr);
             string result ="";
             foreach (Match m in mc)
