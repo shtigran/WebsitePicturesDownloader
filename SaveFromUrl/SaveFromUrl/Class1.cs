@@ -71,13 +71,9 @@ namespace ConsoleApplicationTest
                             flag++;
                             Console.WriteLine(item);
                         }
-
                     }
                 }
-
-
             }
-
             Console.ReadKey();
         }
 
@@ -87,13 +83,9 @@ namespace ConsoleApplicationTest
             string result ="";
             foreach (Match m in mc)
             {
-                
-                result += m.ToString() + "\n";
-                
-
+                result += m.ToString() + "\n";             
             }
             return result;
         }
-
     }
 }
