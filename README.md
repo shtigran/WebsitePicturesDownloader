@@ -9,7 +9,7 @@
 ![gif source](https://github.com/shtigran/WebsitePicturesDownloader/blob/master/gif.gif)
 
 ### Purpose
-This program allow You download all images from any URL.
+This program allows You download all images from any URL.
 
 ----
 
